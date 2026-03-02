@@ -20,5 +20,11 @@ class AppRoutes {
   static const String chatHistory = '/chat-history';
   static const String chatDetail = '/chat-detail';
 
+  // Booking
+  static const String lawyerDetail = '/lawyer-detail';
+  static const String booking = '/booking';
+  static const String bookingSuccess = '/booking-success';
+  static const String reviews = '/reviews';
+
   static const String initial = splash;
 }

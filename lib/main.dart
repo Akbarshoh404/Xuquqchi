@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'core/routes/app_router.dart';
 import 'core/routes/app_routes.dart';
 import 'controllers/auth_controller.dart';
+import 'controllers/booking_controller.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,12 +17,13 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => AuthController()),
+        ChangeNotifierProvider(create: (_) => BookingController()),
       ],
       child: MaterialApp(
-        title: 'Medify',
+        title: 'Xuquqchi',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF2563EB)),
+          colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF0066FF)),
           useMaterial3: true,
           fontFamily: 'Urbanist',
         ),

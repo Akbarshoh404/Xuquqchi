@@ -12,6 +12,11 @@ import '../../features/auth/pages/set_fingerprint_page.dart';
 import '../../features/home/home_page.dart';
 import '../../features/chat/pages/chat_history_page.dart';
 import '../../features/chat/pages/chat_detail_page.dart';
+import '../../features/booking/lawyer_detail_screen.dart';
+import '../../features/booking/booking_screen.dart';
+import '../../features/booking/booking_success_screen.dart';
+import '../../features/booking/review_screen.dart';
+import '../../features/booking/models/lawyer_model.dart';
 
 class AppRouter {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -37,14 +42,35 @@ class AppRouter {
       case AppRoutes.setFingerprint:
         return _route(const SetFingerprintPage());
       case AppRoutes.home:
-        return _route(const HomePage());
+        final tabArgs = args as Map<String, dynamic>?;
+        return _route(HomePage(initialTab: tabArgs?['tab'] as int? ?? 0));
       case AppRoutes.chatHistory:
         return _route(const ChatHistoryPage());
       case AppRoutes.chatDetail:
         final doctor = args as Map<String, dynamic>?;
         return _route(ChatDetailPage(
-          doctorName: doctor?['name'] ?? 'Dr. Unknown',
+          doctorName: doctor?['name'] ?? 'Unknown',
           doctorImage: doctor?['image'] ?? '',
+        ));
+      case AppRoutes.lawyerDetail:
+        final lawyer = args as Lawyer;
+        return _route(LawyerDetailScreen(lawyer: lawyer));
+      case AppRoutes.booking:
+        final lawyer = args as Lawyer;
+        return _route(BookingScreen(lawyer: lawyer));
+      case AppRoutes.bookingSuccess:
+        final data = args as Map<String, dynamic>;
+        return _route(BookingSuccessScreen(
+          lawyer: data['lawyer'] as Lawyer,
+          date: data['date'] as DateTime,
+          time: data['time'] as String,
+        ));
+      case AppRoutes.reviews:
+        final data = args as Map<String, dynamic>;
+        return _route(ReviewScreen(
+          rating: (data['rating'] as num).toDouble(),
+          totalReviews: data['totalReviews'] as int,
+          reviews: data['reviews'] as List<Review>,
         ));
       default:
         return _route(const SplashPage());
